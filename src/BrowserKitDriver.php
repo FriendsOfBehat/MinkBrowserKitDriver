@@ -55,7 +55,7 @@ class BrowserKitDriver extends CoreDriver
         $this->client->followRedirects(true);
 
         if ($baseUrl !== null && $client instanceof HttpKernelBrowser) {
-            $client->setServerParameter('SCRIPT_FILENAME', parse_url($baseUrl, PHP_URL_PATH));
+            $client->setServerParameter('SCRIPT_FILENAME', parse_url($baseUrl, PHP_URL_PATH) ?? '');
         }
     }
 
