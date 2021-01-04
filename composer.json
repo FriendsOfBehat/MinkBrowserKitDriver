@@ -23,7 +23,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "hhttps://github.com/antoniovj1/driver-testsuite"
+            "url": "https://github.com/antoniovj1/driver-testsuite"
         }
     ],
     "require-dev": {
