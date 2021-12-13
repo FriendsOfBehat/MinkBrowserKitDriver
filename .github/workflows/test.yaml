@@ -18,11 +18,12 @@ jobs:
           - '5.0.*'
           - '5.1.*'
           - '5.2.*'
+          - '5.3.*'
+          - '5.4.*'
         php:
-          - '7.2'
-          - '7.3'
           - '7.4'
           - '8.0'
+          - '8.1'
 
     name: PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }}
     steps:
