@@ -6,6 +6,7 @@ use Behat\Mink\Driver\BrowserKitDriver;
 use Behat\Mink\Exception\DriverException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\BrowserKit\AbstractBrowser;
+use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\BrowserKit\Response;
 
 class ErrorHandlingTest extends TestCase
