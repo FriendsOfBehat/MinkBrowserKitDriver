@@ -6,22 +6,18 @@ use Behat\Mink\Driver\BrowserKitDriver;
 use Behat\Mink\Exception\DriverException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\BrowserKit\AbstractBrowser;
-use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\BrowserKit\Response;
 
 class ErrorHandlingTest extends TestCase
 {
-    /**
-     * @var TestClient
-     */
-    private $client;
+    private TestClient $client;
 
     protected function setUp(): void
     {
         $this->client = new TestClient();
     }
 
-    public function testGetClient()
+    public function testGetClient(): void
     {
         $this->assertSame($this->client, $this->getDriver()->getClient());
     }
@@ -31,7 +27,7 @@ class ErrorHandlingTest extends TestCase
      * Although the deprecations are handled, there's no way to avoid the deprecation message here.
      * @group legacy
      */
-    public function testGetResponseHeaderWithoutVisit()
+    public function testGetResponseHeaderWithoutVisit(): void
     {
         $this->expectException(DriverException::class);
         $this->expectExceptionMessage('Unable to access the response before visiting a page');
@@ -44,7 +40,7 @@ class ErrorHandlingTest extends TestCase
      * Although the deprecations are handled, there's no way to avoid the deprecation message here.
      * @group legacy
      */
-    public function testFindWithoutVisit()
+    public function testFindWithoutVisit(): void
     {
         $this->expectException(DriverException::class);
         $this->expectExceptionMessage('Unable to access the response content before visiting a page');
@@ -57,7 +53,7 @@ class ErrorHandlingTest extends TestCase
      * Although the deprecations are handled, there's no way to avoid the deprecation message here.
      * @group legacy
      */
-    public function testGetCurrentUrlWithoutVisit()
+    public function testGetCurrentUrlWithoutVisit(): void
     {
         $this->expectException(DriverException::class);
         $this->expectExceptionMessage('Unable to access the request before visiting a page');
@@ -65,7 +61,7 @@ class ErrorHandlingTest extends TestCase
         $this->getDriver()->getCurrentUrl();
     }
 
-    public function testNotMatchingHtml5FormId()
+    public function testNotMatchingHtml5FormId(): void
     {
         $this->expectException(DriverException::class);
         $this->expectExceptionMessage('The selected node has an invalid form attribute (foo)');
@@ -112,7 +108,7 @@ HTML;
         $driver->setValue('//input[./@name="test"]', 'bar');
     }
 
-    public function testManipulateInputWithoutForm()
+    public function testManipulateInputWithoutForm(): void
     {
         $this->expectException(DriverException::class);
         $this->expectExceptionMessage('The selected node does not have a form ancestor.');
@@ -137,7 +133,7 @@ HTML;
         $driver->setValue('//input[./@name="test"]', 'bar');
     }
 
-    public function testClickOnUnsupportedElement()
+    public function testClickOnUnsupportedElement(): void
     {
         $this->expectException(DriverException::class);
         $this->expectExceptionMessage('Behat\Mink\Driver\BrowserKitDriver supports clicking on links and submit or reset buttons only. But "div" provided');
@@ -157,7 +153,7 @@ HTML;
         $driver->click('//div');
     }
 
-    private function getDriver()
+    private function getDriver(): BrowserKitDriver
     {
         return new BrowserKitDriver($this->client);
     }
@@ -168,17 +164,17 @@ class TestClient extends AbstractBrowser
     protected $nextResponse = null;
     protected $nextScript = null;
 
-    public function setNextResponse(Response $response)
+    public function setNextResponse(Response $response): void
     {
         $this->nextResponse = $response;
     }
 
-    public function setNextScript($script)
+    public function setNextScript($script): void
     {
         $this->nextScript = $script;
     }
 
-    protected function doRequest($request)
+    protected function doRequest($request): Response
     {
         if (null === $this->nextResponse) {
             return new Response();
