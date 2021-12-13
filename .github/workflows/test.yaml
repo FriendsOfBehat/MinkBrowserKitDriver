@@ -16,10 +16,14 @@ jobs:
         symfony-versions:
           - '4.4.*'
           - '5.4.*'
+          - '6.0.*'
         php:
           - '7.4'
           - '8.0'
           - '8.1'
+        exclude:
+          -   php-version: '7.4'
+              symfony-version: '6.0.*'
 
     name: PHP ${{ matrix.php }} Symfony ${{ matrix.symfony-versions }}
     steps:
