@@ -13,7 +13,7 @@ on:
 jobs:
     test:
         name: PHP ${{ matrix.php-version }} + Symfony ${{ matrix.symfony-version }}
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-latest
         continue-on-error: false
         strategy:
             fail-fast: false
@@ -23,19 +23,38 @@ jobs:
                     - '8.0'
                     - '8.1'
                     - '8.2'
+                    - '8.4'
+                    - '8.5'
                 symfony-version:
                     - '4.4.*'
                     - '5.4.*'
                     - '6.0.*'
                     - '7.0.*'
+                    - '8.0.*'
                 exclude:
                     - php-version: '7.4'
                       symfony-version: '6.0.*'
                     - php-version: '7.4'
                       symfony-version: '7.0.*'
+                    - php-version: '7.4'
+                      symfony-version: '8.0.*'
                     - php-version: '8.0'
                       symfony-version: '7.0.*'
+                    - php-version: '8.0'
+                      symfony-version: '8.0.*'
                     - php-version: '8.1'
+                      symfony-version: '7.0.*'
+                    - php-version: '8.1'
+                      symfony-version: '8.0.*'
+                    - php-version: '8.2'
+                      symfony-version: '8.0.*'
+                    - php-version: '8.5'
+                      symfony-version: '4.4.*'
+                    - php-version: '8.5'
+                      symfony-version: '5.4.*'
+                    - php-version: '8.5'
+                      symfony-version: '6.0.*'
+                    - php-version: '8.5'
                       symfony-version: '7.0.*'
         steps:
             - name: Checkout
@@ -69,3 +88,5 @@ jobs:
 
             - name: Run PHPUnit
               run: vendor/bin/simple-phpunit -v
+              env:
+                  SYMFONY_DEPRECATIONS_HELPER: max[total]=999999
